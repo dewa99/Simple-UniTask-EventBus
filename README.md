@@ -20,10 +20,11 @@ The `EventBus<T>` is a static generic class. By making it generic (`where T : st
 * **Publishing:** When `PublishAsync` is called, it iterates through all subscribers and `await`s their tasks sequentially. 
 
 ### 2. The Event Payload (`Animation.GameAction.cs`)
-Events are defined as structs. This avoids garbage collection (GC) allocation when creating new events.
+Events are defined as structs. This avoids garbage collection (GC) allocation when creating new events. Structs can also contain parameters to pass data to subscribers.
 ```csharp
 public struct PlaySquareAnimation : IGameEvent
 {
+    public int Loop;
     public async UniTask Publish()
     {
         // Publishes itself to its specific Event Bus
@@ -31,7 +32,7 @@ public struct PlaySquareAnimation : IGameEvent
     }
 }
 ```
-*In this demo, the struct itself contains a convenience `Publish()` method to easily trigger the event bus.*
+*In this demo, the struct itself contains a convenience `Publish()` method to easily trigger the event bus, and a `Loop` parameter to tell the animation how many times to play.*
 
 ### 3. The Subscriber / Listener (`SquareView.cs`)
 The subscriber is the object that reacts to the event. It subscribes to the specific struct type it cares about.
@@ -43,7 +44,10 @@ The subscriber is the object that reacts to the event. It subscribes to the spec
 The publisher is what triggers the event. 
 * When the UI button is clicked, it calls `async void OnClick()`.
 * It disables the button to prevent spam-clicking.
-* It instantiates the event struct and `await`s its `Publish()` method: `await new PlaySquareAnimation().Publish();`.
+* It instantiates the event struct with parameters and `await`s its `Publish()` method: 
+  ```csharp
+  await new PlaySquareAnimation() { Loop = loop }.Publish();
+  ```
 * **Because it `await`s the publish method**, the code execution here pauses until `SquareView` completely finishes its animation.
 * Once the animation is done, the code resumes and the button becomes interactable again.
 
@@ -55,13 +59,13 @@ Here is exactly what happens when you press the "Play" button in the demo:
 
 1. **User clicks PlayButton.**
 2. `PlayButton.OnClick()` fires. The button becomes non-interactable.
-3. `new PlaySquareAnimation().Publish()` is called and **awaited**.
+3. `new PlaySquareAnimation() { Loop = loop }.Publish()` is called and **awaited**.
 4. Inside `Publish()`, the `EventBus<PlaySquareAnimation>.PublishAsync(this)` is called and **awaited**.
 5. The Event Bus loops through its subscribers (in this case, just `SquareView`).
 6. The Event Bus calls `SquareView.PlayAnimation()` and **awaits** the UniTask it returns.
-7. `SquareView` starts a PrimeTween sequence (jumping up, spinning, and dropping down).
+7. `SquareView` loops through the PrimeTween sequence (jumping up, spinning, and dropping down) for the specified `Loop` amount.
 8. The animation plays. Meanwhile, the Event Bus and the `PlayButton` are patiently waiting.
-9. After 1 second, the PrimeTween animation finishes. The `UniTask` in `SquareView` completes.
+9. After the sequence loops finish, the `UniTask` in `SquareView` completes.
 10. The Event Bus sees the task is complete, finishes its loop, and completes its own `UniTask`.
 11. The `Publish()` method completes.
 12. `PlayButton.OnClick()` resumes on the next line. The button becomes interactable again.

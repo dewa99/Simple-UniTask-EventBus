@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class PlayButton : MonoBehaviour
 {
     private Button button;
+    [SerializeField] private int loop = 1;
     void Start()
     {
         button = this.GetComponent<UnityEngine.UI.Button>();
@@ -13,7 +14,10 @@ public class PlayButton : MonoBehaviour
     async void OnClick()
     {
         button.interactable = false;
-        await new PlaySquareAnimation().Publish();
+        await new PlaySquareAnimation()
+        {
+            Loop = loop
+        }.Publish();
         button.interactable = true;
     }
 }
