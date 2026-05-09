@@ -16,5 +16,12 @@
   "author": {
     "name": "dewa99",
     "url": "https://github.com/dewa99"
-  }
+  },
+  "samples": [
+    {
+      "displayName": "Demo",
+      "description": "A demo showcasing how to use the EventBus.",
+      "path": "Samples~/Demo"
+    }
+  ]
 }
