@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using Cysharp.Threading.Tasks;
 
 /// <summary>
 /// A lightweight, strongly-typed Event Bus designed for asynchronous (awaitable) events.
@@ -9,12 +10,12 @@ using System;
 /// </summary>
 public static class EventBus<T> where T : struct
 {
-    private static readonly List<Func<T, Awaitable>> subscribers = new();
+    private static readonly List<Func<T, UniTask>> subscribers = new();
 
     /// <summary>
     /// Subscribes an asynchronous handler to the event.
     /// </summary>
-    public static void Subscribe(Func<T, Awaitable> handler)
+    public static void Subscribe(Func<T, UniTask> handler)
     {
         if (!subscribers.Contains(handler))
         {
@@ -26,7 +27,7 @@ public static class EventBus<T> where T : struct
     /// <summary>
     /// Unsubscribes a handler from the event.
     /// </summary>
-    public static void Unsubscribe(Func<T, Awaitable> handler)
+    public static void Unsubscribe(Func<T, UniTask> handler)
     {
         subscribers.Remove(handler);
     }
@@ -36,7 +37,7 @@ public static class EventBus<T> where T : struct
     /// Use 'await' on this method to wait until every subscribed system has completely finished its async task.
     /// Note: This awaits subscribers sequentially. The next subscriber will not start until the current one finishes.
     /// </summary>
-    public static async Awaitable PublishAsync(T eventData)
+    public static async UniTask PublishAsync(T eventData)
     {
         Debug.Log($"[EventBus<{typeof(T).Name}>] Publishing to {subscribers.Count} subscribers.");
         for (int i = 0; i < subscribers.Count; i++)
