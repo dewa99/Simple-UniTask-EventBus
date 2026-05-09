@@ -1,0 +1,20 @@
+{
+  "name": "com.dewz.simple-unitask-eventbus",
+  "version": "1.0.0",
+  "displayName": "Simple UniTask EventBus",
+  "description": "A lightweight, strongly-typed, and asynchronous Event Bus in Unity using UniTask.",
+  "unity": "2021.3",
+  "dependencies": {
+    "com.cysharp.unitask": "2.3.1"
+  },
+  "keywords": [
+    "unity",
+    "unitask",
+    "eventbus",
+    "async"
+  ],
+  "author": {
+    "name": "dewa99",
+    "url": "https://github.com/dewa99"
+  }
+}

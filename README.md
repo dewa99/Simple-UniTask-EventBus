@@ -2,6 +2,22 @@
 
 This project implements a lightweight, strongly-typed, and asynchronous Event Bus in Unity using [UniTask](https://github.com/Cysharp/UniTask). It allows different systems in your game to communicate with each other without tight coupling, while fully supporting asynchronous operations (like animations, server requests, or waiting for delays).
 
+## 📦 Installation
+
+You can install this package using the **Unity Package Manager** with a Git URL.
+
+1. Open **Window -> Package Manager**.
+2. Click the **+** button in the top-left corner and select **"Add package from git URL..."**.
+3. Paste the following URL:
+   ```text
+   https://github.com/dewa99/Simple-UniTask-EventBus.git?path=/Assets/Simple-UniTask-EventBus
+   ```
+4. Click **Add**.
+
+*Note: This package requires [UniTask](https://github.com/Cysharp/UniTask). If it's not already in your project, Unity will try to resolve it, but it's recommended to install UniTask first.*
+
+---
+
 ## 🧠 Core Concept
 
 Unlike a standard synchronous Event Bus (where firing an event instantly executes all listeners and continues), this Event Bus is **Asynchronous**. 
