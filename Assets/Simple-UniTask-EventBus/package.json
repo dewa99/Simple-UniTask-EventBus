@@ -20,5 +20,8 @@
       "description": "A demo showcasing how to use the EventBus.",
       "path": "Samples/Demo"
     }
-  ]
+  ],
+  "dependencies": {
+    "com.cysharp.unitask": "2.5.10"
+  }
 }
