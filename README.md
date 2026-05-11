@@ -8,13 +8,18 @@ You can install this package using the **Unity Package Manager** with a Git URL.
 
 1. Open **Window -> Package Manager**.
 2. Click the **+** button in the top-left corner and select **"Add package from git URL..."**.
-3. Paste the following URL:
+3. **First, install UniTask** by pasting this URL and clicking **Add**:
+   ```text
+   https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask
+   ```
+4. Once UniTask is installed, click **"Add package from git URL..."** again.
+5. Paste the EventBus URL:
    ```text
    https://github.com/dewa99/Simple-UniTask-EventBus.git?path=/Assets/Simple-UniTask-EventBus
    ```
-4. Click **Add**.
+6. Click **Add**.
 
-*Note: This package requires [UniTask](https://github.com/Cysharp/UniTask). If it's not already in your project, Unity will try to resolve it, but it's recommended to install UniTask first.*
+*Note: UniTask MUST be installed first, otherwise Unity will throw a "Package cannot be found" error when installing this package.*
 
 ---
 
@@ -54,7 +59,7 @@ public struct PlaySquareAnimation : IGameEvent
 The subscriber is the object that reacts to the event. It subscribes to the specific struct type it cares about.
 * In `Start()`, it subscribes its `PlayAnimation` method to `EventBus<PlaySquareAnimation>`.
 * In `OnDestroy()`, it properly unsubscribes to prevent memory leaks.
-* The `PlayAnimation` method returns a `UniTask`. In the demo, it triggers a PrimeTween animation and the task finishes only when the animation completes.
+* The `PlayAnimation` method returns a `UniTask`. In the demo, it plays a visual animation loop using native `Vector3.Lerp` and `UniTask.Yield()`. The task finishes only when the animation completes.
 
 ### 4. The Publisher (`PlayButton.cs`)
 The publisher is what triggers the event. 
@@ -79,7 +84,7 @@ Here is exactly what happens when you press the "Play" button in the demo:
 4. Inside `Publish()`, the `EventBus<PlaySquareAnimation>.PublishAsync(this)` is called and **awaited**.
 5. The Event Bus loops through its subscribers (in this case, just `SquareView`).
 6. The Event Bus calls `SquareView.PlayAnimation()` and **awaits** the UniTask it returns.
-7. `SquareView` loops through the PrimeTween sequence (jumping up, spinning, and dropping down) for the specified `Loop` amount.
+7. `SquareView` loops through the visual sequence (jumping up, spinning, and dropping down) for the specified `Loop` amount using native Unity math.
 8. The animation plays. Meanwhile, the Event Bus and the `PlayButton` are patiently waiting.
 9. After the sequence loops finish, the `UniTask` in `SquareView` completes.
 10. The Event Bus sees the task is complete, finishes its loop, and completes its own `UniTask`.
