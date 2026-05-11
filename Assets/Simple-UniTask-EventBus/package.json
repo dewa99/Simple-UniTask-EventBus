@@ -5,7 +5,7 @@
   "description": "A lightweight, strongly-typed, and asynchronous Event Bus in Unity using UniTask.",
   "unity": "2021.3",
   "dependencies": {
-    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask"
+    "com.cysharp.unitask": "2.5.10"
   },
   "keywords": [
     "unity",
