@@ -4,7 +4,28 @@ This project implements a lightweight, strongly-typed, and asynchronous Event Bu
 
 ## 📦 Installation
 
-You can install this package using the **Unity Package Manager** with a Git URL.
+### Option 1: Install via OpenUPM (Recommended)
+
+This package is available on the [OpenUPM](https://openupm.com/) registry. This is the recommended method because it will automatically install **UniTask** as a dependency for you.
+
+You can install it via the openupm-cli:
+```bash
+openupm add com.dewagede.simpleunitaskeventbus
+```
+
+Or you can add it directly to your `manifest.json`:
+1. Open **Edit -> Project Settings -> Package Manager**
+2. Add a new Scoped Registry:
+   * **Name**: OpenUPM
+   * **URL**: `https://package.openupm.com`
+   * **Scope(s)**: `com.dewagede.simpleunitaskeventbus` and `com.cysharp.unitask`
+3. Open **Window -> Package Manager**, select **"My Registries"**, and install **Simple UniTask Event Bus**.
+
+---
+
+### Option 2: Install via Git URL
+
+You can also install this package directly using the **Unity Package Manager** with a Git URL.
 
 1. Open **Window -> Package Manager**.
 2. Click the **+** button in the top-left corner and select **"Add package from git URL..."**.
@@ -15,11 +36,11 @@ You can install this package using the **Unity Package Manager** with a Git URL.
 4. Once UniTask is installed, click **"Add package from git URL..."** again.
 5. Paste the EventBus URL:
    ```text
-   https://github.com/dewa99/Simple-UniTask-EventBus.git?path=/Assets/Simple-UniTask-EventBus
+   https://github.com/dewa99/Simple-UniTask-EventBus.git?path=/Packages/com.dewagede.simpleunitaskeventbus
    ```
 6. Click **Add**.
 
-*Note: UniTask MUST be installed first, otherwise Unity will throw a "Package cannot be found" error when installing this package.*
+*Note: When using Git URLs, UniTask MUST be installed first, otherwise Unity will throw a "Package cannot be found" error when installing this package.*
 
 ---
 
