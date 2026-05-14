@@ -1,0 +1,10 @@
+{
+    "name": "Dewagede.Simpleunitaskeventbus.Editor",
+    "references": [
+      "Dewagede.Simpleunitaskeventbus"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

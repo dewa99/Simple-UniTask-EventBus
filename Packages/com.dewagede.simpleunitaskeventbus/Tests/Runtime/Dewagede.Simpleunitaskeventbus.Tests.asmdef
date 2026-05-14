@@ -1,0 +1,11 @@
+{
+    "name": "Dewagede.Simpleunitaskeventbus.Tests",
+    "references": [
+        "Dewagede.Simpleunitaskeventbus"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": []
+}

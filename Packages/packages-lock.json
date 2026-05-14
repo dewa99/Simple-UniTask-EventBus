@@ -1,11 +1,19 @@
 {
   "dependencies": {
     "com.cysharp.unitask": {
-      "version": "2.5.10",
+      "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.10",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "a9e27c03d411d2fca01cc7410c24c97cd77cb539"
+      "hash": "7c0f199fe0d3fc528024488ccd671e6c7b27745b"
+    },
+    "com.dewagede.simpleunitaskeventbus": {
+      "version": "file:com.dewagede.simpleunitaskeventbus",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.cysharp.unitask": "2.5.10"
+      }
     },
     "com.unity.2d.animation": {
       "version": "14.0.3",

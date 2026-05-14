@@ -1,0 +1,14 @@
+{
+    "name": "Dewagede.Simpleunitaskeventbus.Editor.Tests",
+    "references": [
+        "Dewagede.Simpleunitaskeventbus.Editor",
+        "Dewagede.Simpleunitaskeventbus"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}
