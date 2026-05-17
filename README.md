@@ -15,7 +15,7 @@ You can install this package using the **Unity Package Manager** with a Git URL.
 4. Once UniTask is installed, click **"Add package from git URL..."** again.
 5. Paste the EventBus URL:
    ```text
-   https://github.com/dewa99/Simple-UniTask-EventBus.git?path=/Assets/Simple-UniTask-EventBus
+   https://github.com/dewa99/Simple-UniTask-EventBus.git?path=/Packages/com.dewz.simple-unitask-eventbus
    ```
 6. Click **Add**.
 
